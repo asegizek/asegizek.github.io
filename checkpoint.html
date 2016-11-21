@@ -19,41 +19,22 @@
 
     <section class="main-content">
       <h2>
-<a id="project-proposal" class="anchor" href="#project-proposal" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Project Proposal</h2>
+<a id="project-proposal" class="anchor" href="#project-proposal" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Checkpoint</h2>
 
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Oscillator.gif" alt=""></p>
 
 <h3>
 <a id="summary" class="anchor" href="#summary" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Summary</h3>
 
-<p>We are going to make a parallel cellular automaton framework for hexagonal grids that will run on CUDA. It will be able to efficiently run cellular automata with many states and any set of rules which determine state based on a cell’s surrounding neighborhood. </p>
+<p>So far we have made a serial and a parallel implementation of one particular hexagonal cellular automata. The automata is fairly simple, each cell has two states: alive and dead and the rules are as follows: any dead cell can become alive if there are exactly 2 live cells near it, and any live cell continues to be alive if there are 3 or 4 live cells near it. Testing this automata we have achieved around a 55x speedup with our cuda implementation as compared to our serial implementation for a 1000 by 1000 grid with 1000+ iterations. We have also created a simple code skeleton for displaying the cells on the computer but have yet to connect the two modules together. </p>
+<p>With regards to our deliverables we are behind schedule and are thinking of perhaps narrowing our framework to work on a few set of cellular automata.
 
-<h3>
-<a id="background" class="anchor" href="#background" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Background</h3>
 
-<p>Cellular automata are discrete models used to simulate various processes often inspired by nature. It usually consists of a grid of cells where each cell is in one of a finite number of states. For every time step the state of each cell is updated based on a predefined rule with respect to its neighboring cells. For example in the famous Game of Life each cell in the “live” state  becomes “dead” if there are fewer than 2 live neighboring cells or more than 3 live cells. Whereas any dead cell can become live again if it is surrounded by exactly 3 live cells. These simple rules can create complex simulations. We want to extend the idea of cellular automata to something more challenging than just a square tiled grid:  a hexagonally tiled grid. This different layout provides its own sets of challenges which we will cover in the next section.</p>
 
-<h3>
-<a id="challenge" class="anchor" href="#challenge" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Challenge</h3>
 
-<p>Creating a parallel cellular automaton for a normal cartesian grid has multiple challenges, such as determining how to split up the work, handling cells at the edge of a thread’s region, or determining if there are sections of the grid where no work needs to be done. Creating a cellular automaton for a hexagonal grid includes all these challenges in addition to many more. As all of the previous parallel programs we’ve worked on so far have operated on grids of squares, working with a hexagonal grid will require different techniques than the ones we’ve used previously. Mapping a hexagonal grid to memory isn’t a clear cut task, and finding the most efficient way to do this will be necessary. In addition to this, using CUDA will have its own set of challenges as we’ll need to find the most efficient way to allocate irregularly shaped groups of hexagons between blocks and threads. Finding the best approach to take for solving these problems should prove to be an interesting exercise. </p>
+At the poster session we still plan to show both a graph of our implementation and a real live demo displaying the cellular automata in action.
 
-<h3>
-<a id="resources" class="anchor" href="#resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Resources</h3>
 
-<p>We will be using the gates machines with the NVIDIA GPU’s for our project. We  will code this project using C++ and we will not be using any starter code although we will probably use a third party library to render our simulations.</p>
-
-<h3>
-<a id="goals" class="anchor" href="#goals" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Goals</h3>
-
-<p>We plan to create a fast general cellular automata simulator for a hexagonal grid. We will allow an arbitrarily large number of possible cell states, and allow for a cell to change its state based on any rule which looks at the states of its neighboring cells. We are unsure of how fast we’d like our simulation to be, but it should at least be significantly faster than the serial implementation, and hopefully be on the same order of magnitude as the very advanced, professionally written cellular automaton simulator Golly. 
-If things go better than expected and we are ahead of schedule we would hope to be able to extend the framework to allow each cell to update not only based on its neighboring cells but perhaps to cells farther away, granting the framework a lot more flexibility. However if we find ourselves behind schedule then we expect ourselves to specialize our framework towards one particular cellular automaton and achieve decent speedup there.
-For the demo we plan to showcase the speedup graphs of our parallel framework and hopefully the real time simulation of our framework in action while ssh’ed to a Gates machine. However if it turns out the connection is too slow we will pre-record a video showcasing the real time simulations of both the sequential and parallel versions of various cellular automata.</p>
-
-<h3>
-<a id="platform" class="anchor" href="#platform" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Platform</h3>
-
-<p>For this project we decided to use C++ because we already know how to use it with CUDA and because we’ll be able to make use of the features C++ adds to C.</p>
+Our main concern is figuring out if our implementation is fast enough since we do not have a good reference to compare it to besides a simple serial implementation. We are also deliberating whether or not we should still continue with a general framework approach or narrowing it down to a few types of cellular automata.</p>
 
 <h3>
 <a id="schedule" class="anchor" href="#schedule" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Schedule</h3>
